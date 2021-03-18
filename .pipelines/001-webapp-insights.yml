@@ -1,0 +1,39 @@
+displayName: 001-webapp-insights
+
+trigger:
+  - main
+
+pool:
+  vmImage: windows-2019
+
+steps:
+  - bash: |
+      # Fetch the latest Bicep CLI binary
+      curl -Lo bicep https://github.com/Azure/bicep/releases/latest/download/bicep-linux-x64
+      # Mark it as executable
+      chmod +x ./bicep
+      # Add bicep to your PATH (requires admin)
+      sudo mv ./bicep /usr/local/bin/bicep
+      # Verify you can now access the 'bicep' command
+      bicep --help
+      # Done!
+
+    displayName: "Install bicep"
+
+  - bash: |
+      bicep build $(System.DefaultWorkingDirectory)/storage.bicep
+
+    displayName: "Build bicep file"
+
+  - task: CopyFiles@2
+    displayName: 'Copy Files to: $(build.artifactstagingdirectory)\arm'
+    inputs:
+      SourceFolder: "$(System.DefaultWorkingDirectory)"
+      Contents: "*.json"
+      TargetFolder: "$(build.artifactstagingdirectory)/arm"
+
+  - task: PublishPipelineArtifact@1
+    inputs:
+      targetPath: "$(build.artifactstagingdirectory)/arm"
+      artifact: "drop"
+      publishLocation: "pipeline"
