@@ -25,16 +25,6 @@ steps:
   displayName: "Build bicep file"
   inputs:
     targetType: 'inline'
-    script: 'bicep build $(System.DefaultWorkingDirectory)/001-webapp-insights.bicep'
+    script: |
+      bicep --help
     pwsh: true
-- task: CopyFiles@2
-  displayName: 'Copy Files to: $(build.artifactstagingdirectory)\arm'
-  inputs:
-    SourceFolder: "$(System.DefaultWorkingDirectory)"
-    Contents: "*.json"
-    TargetFolder: "$(build.artifactstagingdirectory)/arm"
-- task: PublishPipelineArtifact@1
-  inputs:
-    targetPath: "$(build.artifactstagingdirectory)/arm"
-    artifact: "drop"
-    publishLocation: "pipeline"
