@@ -2,7 +2,7 @@ name: 001-webapp-insights
 
 variables:
   - name: installPath
-    value: $env:USERPROFILE\\bicep
+    value: $env:USERPROFILE\bicep
   - name: bicep
     value: $(installPath)\bicep.exe
 
@@ -27,5 +27,5 @@ steps:
   inputs:
     targetType: 'inline'
     script: |
-      $(bicep) --help
+      "$(bicep)" --help
     pwsh: true
