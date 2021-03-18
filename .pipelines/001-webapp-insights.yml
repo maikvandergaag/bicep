@@ -1,4 +1,4 @@
-displayName: 001-webapp-insights
+name: 001-webapp-insights
 
 trigger:
   - main
