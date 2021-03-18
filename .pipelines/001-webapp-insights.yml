@@ -19,7 +19,7 @@ steps:
     script: |
       $installDir = New-Item -ItemType Directory -Path $(installPath) -Force
       $installDir.Attributes += 'Hidden'
-      (New-Object Net.WebClient).DownloadFile("https://github.com/Azure/bicep/releases/latest/download/bicep-win-x64.exe", "$installPath\bicep.exe")
+      (New-Object Net.WebClient).DownloadFile("https://github.com/Azure/bicep/releases/latest/download/bicep-win-x64.exe", "$(installPath)\bicep.exe")
     pwsh: true
   displayName: "Install bicep"
 - task: PowerShell@2
