@@ -7,6 +7,11 @@ variables:
     value: $(installPath)\bicep.exe
   - name: filepath
     value: 001-webapp-insights/webapp-insights.bicep
+  - name: resourcegroupname
+    value: sb-templatespecs
+  - name: location
+    value: westeurope
+    
 trigger:
   - main
   
@@ -29,6 +34,19 @@ steps:
     targetType: 'inline'
     script: |
       $(bicep) build $(System.DefaultWorkingDirectory)/$(filepath)
+    pwsh: true
+- task: AzurePowerShell@5
+  displayName: "Check resource group"
+  inputs:
+    azureSubscription: 'Subscription MPN Sandbox(b27ac091-3de5-46d1-8f61-add3171f6e52)'
+    ScriptType: 'InlineScript'
+    Inline: |
+      if (!(Get-AzResourceGroup "$(resourcegroupname)" -ErrorAction SilentlyContinue)){ 
+          New-AzResourceGroup -Name "$(resourcegroupname)" -Location "$(location)"
+      }else{
+          Write-Output "The resource group already exists"
+      }
+    azurePowerShellVersion: 'LatestVersion'
     pwsh: true
 - task: CopyFiles@2
   displayName: 'Copy files to ARM staging directory'
