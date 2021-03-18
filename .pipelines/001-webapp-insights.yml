@@ -1,4 +1,4 @@
-name: 001-webapp-insights
+name: $(versionnumber)
 
 variables:
   - name: installPath
@@ -55,14 +55,20 @@ steps:
     azurePowerShellVersion: 'LatestVersion'
     pwsh: true
 - task: AzurePowerShell@5
-  displayName: "Dploy template spec"
+  displayName: "Deploy template spec"
   inputs:
     azureSubscription: 'Subscription MPN Sandbox(b27ac091-3de5-46d1-8f61-add3171f6e52)'
     ScriptType: 'InlineScript'
     Inline: |
-      New-AzTemplateSpec -Name "$(templateSpecName)" -Version 1.0 -ResourceGroupName "$(resourcegroupname)" -Location "$(location)" -TemplateFile "$(System.DefaultWorkingDirectory)/$(filepathArm)"
+      New-AzTemplateSpec -Name "$(templateSpecName)" -Version "$(versionnumber)" -ResourceGroupName "$(resourcegroupname)" -Location "$(location)" -TemplateFile "$(System.DefaultWorkingDirectory)/$(filepathArm)"
     azurePowerShellVersion: 'LatestVersion'
     pwsh: true
+- task: versioncounter@1
+  inputs:
+    VersionVariable: 'versionnumber'
+    UpdateMinorVersion: true
+    MaxValuePatchVersion: '9'
+    DevOpsPat: '$(pipeline-pat)'
 - task: CopyFiles@2
   displayName: 'Copy files to ARM staging directory'
   inputs:
