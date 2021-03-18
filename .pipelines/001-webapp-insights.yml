@@ -29,5 +29,6 @@ steps:
   inputs:
     targetType: 'inline'
     script: |
+      bicep build $(System.DefaultWorkingDirectory)/001-webapp-insights/webapp-insights.bicep
       $(bicep) --help
     pwsh: true
