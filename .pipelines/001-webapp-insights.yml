@@ -5,7 +5,8 @@ variables:
     value: $(Agent.HomeDirectory)\tools\bicep
   - name: bicep
     value: $(installPath)\bicep.exe
-
+  - name: filepath
+    value: 001-webapp-insights/webapp-insights.bicep
 trigger:
   - main
   
@@ -22,13 +23,12 @@ steps:
       $installDir.Attributes += 'Hidden'
       (New-Object Net.WebClient).DownloadFile("https://github.com/Azure/bicep/releases/latest/download/bicep-win-x64.exe", "$(installPath)\bicep.exe")
     pwsh: true
-
 - task: PowerShell@2
   displayName: "Build bicep file"
   inputs:
     targetType: 'inline'
     script: |
-      $(bicep) build $(System.DefaultWorkingDirectory)/001-webapp-insights/webapp-insights.bicep
+      $(bicep) build $(System.DefaultWorkingDirectory)/$(filepath)
     pwsh: true
 - task: CopyFiles@2
   displayName: 'Copy files to ARM staging directory'
