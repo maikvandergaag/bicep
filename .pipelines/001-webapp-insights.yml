@@ -14,15 +14,15 @@ pool:
 
 steps:
 - task: PowerShell@2
+  displayName: "Install bicep"
   inputs:
     targetType: 'inline'
     script: |
       $installDir = New-Item -ItemType Directory -Path $(installPath) -Force
       $installDir.Attributes += 'Hidden'
       (New-Object Net.WebClient).DownloadFile("https://github.com/Azure/bicep/releases/latest/download/bicep-win-x64.exe", "$(installPath)\bicep.exe")
-      if (-not $env:path.Contains('$(installPath)')) { $env:path += ";$(installPath)" }
     pwsh: true
-  displayName: "Install bicep"
+
 - task: PowerShell@2
   displayName: "Build bicep file"
   inputs:
@@ -31,12 +31,13 @@ steps:
       $(bicep) build $(System.DefaultWorkingDirectory)/001-webapp-insights/webapp-insights.bicep
     pwsh: true
 - task: CopyFiles@2
-  displayName: 'Copy Files to: $(build.artifactstagingdirectory)\arm'
+  displayName: 'Copy files to ARM staging directory'
   inputs:
     SourceFolder: "$(System.DefaultWorkingDirectory)"
     Contents: "**/*.json"
     TargetFolder: "$(build.artifactstagingdirectory)/arm"
 - task: PublishPipelineArtifact@1
+  displayName: 'Publish Pipeline Artifacts'
   inputs:
     targetPath: "$(build.artifactstagingdirectory)/arm"
     artifact: "drop"
