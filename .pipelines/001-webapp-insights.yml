@@ -64,20 +64,9 @@ steps:
     azurePowerShellVersion: 'LatestVersion'
     pwsh: true
 - task: versioncounter@1
+  displayName: "Update version number"
   inputs:
     VersionVariable: 'versionnumber'
     UpdateMinorVersion: true
     MaxValuePatchVersion: '9'
     DevOpsPat: '$(pipeline-pat)'
-- task: CopyFiles@2
-  displayName: 'Copy files to ARM staging directory'
-  inputs:
-    SourceFolder: "$(System.DefaultWorkingDirectory)"
-    Contents: "**/*.json"
-    TargetFolder: "$(build.artifactstagingdirectory)/arm"
-- task: PublishPipelineArtifact@1
-  displayName: 'Publish Pipeline Artifacts'
-  inputs:
-    targetPath: "$(build.artifactstagingdirectory)/arm"
-    artifact: "drop"
-    publishLocation: "pipeline"
