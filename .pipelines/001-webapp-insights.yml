@@ -30,3 +30,14 @@ steps:
     script: |
       $(bicep) build $(System.DefaultWorkingDirectory)/001-webapp-insights/webapp-insights.bicep
     pwsh: true
+- task: CopyFiles@2
+  displayName: 'Copy Files to: $(build.artifactstagingdirectory)\arm'
+  inputs:
+    SourceFolder: "$(System.DefaultWorkingDirectory)"
+    Contents: "**\*.json"
+    TargetFolder: "$(build.artifactstagingdirectory)/arm"
+- task: PublishPipelineArtifact@1
+  inputs:
+    targetPath: "$(build.artifactstagingdirectory)/arm"
+    artifact: "drop"
+    publishLocation: "pipeline"
