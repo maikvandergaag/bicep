@@ -26,5 +26,5 @@ steps:
   inputs:
     targetType: 'inline'
     script: |
-      bicep --help
+      $env:USERPROFILE\.bicep\bicep --help
     pwsh: true
