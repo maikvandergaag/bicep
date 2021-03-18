@@ -20,9 +20,6 @@ steps:
       $installDir = New-Item -ItemType Directory -Path $(installPath) -Force
       $installDir.Attributes += 'Hidden'
       (New-Object Net.WebClient).DownloadFile("https://github.com/Azure/bicep/releases/latest/download/bicep-win-x64.exe", "$installPath\bicep.exe")
-      $currentPath = (Get-Item -path "HKCU:\Environment" ).GetValue('Path', '', 'DoNotExpandEnvironmentNames')
-      if (-not $env:path.Contains('$(installPath)')) { $env:path += ";$(installPath)" }
-      bicep --help
     pwsh: true
   displayName: "Install bicep"
 - task: PowerShell@2
@@ -31,5 +28,4 @@ steps:
     targetType: 'inline'
     script: |
       $(bicep) --help
-      bicep help
     pwsh: true
