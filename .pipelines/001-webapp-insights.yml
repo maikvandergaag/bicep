@@ -5,8 +5,14 @@ variables:
     value: $(Agent.HomeDirectory)\tools\bicep
   - name: bicep
     value: $(installPath)\bicep.exe
+  - name: filepathbase
+    value: 001-webapp-insights/webapp-insights
   - name: filepath
-    value: 001-webapp-insights/webapp-insights.bicep
+    value: $(filepathbase).bicep
+  - name: filepathArm
+    value: $(filepathbase).json
+  - name: templateSpecName
+    value: az-tempspec-webappinsights
   - name: resourcegroupname
     value: sb-templatespecs
   - name: location
@@ -46,6 +52,15 @@ steps:
       }else{
           Write-Output "The resource group already exists"
       }
+    azurePowerShellVersion: 'LatestVersion'
+    pwsh: true
+- task: AzurePowerShell@5
+  displayName: "Dploy template spec"
+  inputs:
+    azureSubscription: 'Subscription MPN Sandbox(b27ac091-3de5-46d1-8f61-add3171f6e52)'
+    ScriptType: 'InlineScript'
+    Inline: |
+      New-AzTemplateSpec -Name "$(templateSpecName)" -Version 1.0 -ResourceGroupName "$(resourcegroupname)" -Location "$(location)" -TemplateFile "$(System.DefaultWorkingDirectory)/$(filepathArm)"
     azurePowerShellVersion: 'LatestVersion'
     pwsh: true
 - task: CopyFiles@2
