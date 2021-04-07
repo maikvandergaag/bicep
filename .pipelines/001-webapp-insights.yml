@@ -6,7 +6,7 @@ variables:
   - name: bicep
     value: $(installPath)\bicep.exe
   - name: filepathbase
-    value: 001-webapp-insights/webapp-insights
+    value: 001-webapp-insights/001-webapp-insights
   - name: filepath
     value: $(filepathbase).bicep
   - name: filepathArm

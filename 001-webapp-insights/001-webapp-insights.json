@@ -28,7 +28,6 @@
     }
   },
   "functions": [],
-  "variables": {},
   "resources": [
     {
       "type": "Microsoft.Web/serverfarms",
@@ -91,10 +90,10 @@
       "apiVersion": "2020-06-01",
       "name": "[format('{0}/appsettings', parameters('websiteName'))]",
       "properties": {
-        "APPINSIGHTS_INSTRUMENTATIONKEY": "[reference(resourceId('microsoft.insights/components', parameters('appInsightsName'))).InstrumentationKey]"
+        "APPINSIGHTS_INSTRUMENTATIONKEY": "[reference(resourceId('Microsoft.Insights/components', parameters('appInsightsName'))).InstrumentationKey]"
       },
       "dependsOn": [
-        "[resourceId('microsoft.insights/components', parameters('appInsightsName'))]",
+        "[resourceId('Microsoft.Insights/components', parameters('appInsightsName'))]",
         "[resourceId('Microsoft.Web/sites', parameters('websiteName'))]",
         "[resourceId('Microsoft.Web/sites/siteextensions', split(format('{0}/Microsoft.ApplicationInsights.AzureWebsites', parameters('websiteName')), '/')[0], split(format('{0}/Microsoft.ApplicationInsights.AzureWebsites', parameters('websiteName')), '/')[1])]"
       ]
@@ -104,12 +103,13 @@
       "apiVersion": "2020-06-01",
       "name": "[format('{0}/Microsoft.ApplicationInsights.AzureWebsites', parameters('websiteName'))]",
       "dependsOn": [
-        "[resourceId('microsoft.insights/components', parameters('appInsightsName'))]",
-        "[resourceId('Microsoft.Web/sites', parameters('websiteName'))]"
+        "[resourceId('Microsoft.Insights/components', parameters('appInsightsName'))]",
+        "[resourceId('Microsoft.Web/sites', parameters('websiteName'))]",
+        "[resourceId('Microsoft.Web/sites/config', split(format('{0}/logs', parameters('websiteName')), '/')[0], split(format('{0}/logs', parameters('websiteName')), '/')[1])]"
       ]
     },
     {
-      "type": "microsoft.insights/components",
+      "type": "Microsoft.Insights/components",
       "apiVersion": "2020-02-02-preview",
       "name": "[parameters('appInsightsName')]",
       "location": "[parameters('location')]",
@@ -135,5 +135,11 @@
       }
     }
   ],
-  "outputs": {}
+  "metadata": {
+    "_generator": {
+      "name": "bicep",
+      "version": "0.3.126.58533",
+      "templateHash": "1552896797274857085"
+    }
+  }
 }

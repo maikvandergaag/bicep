@@ -66,6 +66,7 @@ resource appServiceSiteExtension 'Microsoft.Web/sites/siteextensions@2020-06-01'
   name: '${appService.name}/Microsoft.ApplicationInsights.AzureWebsites'
   dependsOn: [
     appInsights
+    appServiceLogging
   ]
 }
 resource appInsights 'microsoft.insights/components@2020-02-02-preview' = {
