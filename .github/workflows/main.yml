@@ -29,7 +29,7 @@ jobs:
           sudo mv ./bicepinstall /usr/local/bin/bicep
           bicep --help
        
-      - run:    bicep build ./bicep/001-webapp-insights/001-webapp-insights.bicep
+      - run:    bicep build ./001-webapp-insights/001-webapp-insights.bicep
        
       - name: Archive production artifacts
         uses: actions/upload-artifact@v2
