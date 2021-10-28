@@ -15,16 +15,14 @@ param subnetName string = 'myprivatesubnet'
 param networkSecurityGroupName string = 'aznsg${subnetName}'
 
 
-resource appRg 'Microsoft.Resources/resourceGroups@2020-01-01' = {
+resource appRg 'Microsoft.Resources/resourceGroups@2021-01-01' = {
   name: rgName
   location: location
-  scope: subscription()
 }
 
-resource appRgVnet 'Microsoft.Resources/resourceGroups@2020-01-01' = {
-  name: concat(rgName,'-vnet')
+resource appRgVnet 'Microsoft.Resources/resourceGroups@2021-04-01' = {
+  name: '${rgName}-vnet'
   location: location
-  scope: subscription()
 }
 
 module vms '../.modules/003-linux-vm.bicep' =[for vmItem in vmItems: {
@@ -50,8 +48,3 @@ module vmvnetItem '../.modules/004-vnet.bicep'= {
   }
   scope: appRgVnet
 }
-
-
-
-
-
