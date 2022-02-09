@@ -5,6 +5,7 @@ param appServicePlanName string
 param websiteName string
 param appInsightsName string
 param logAnalyticsName string
+param deployLogs bool
 
 resource appServicePlan 'Microsoft.Web/serverfarms@2020-06-01' = {
   name: appServicePlanName
@@ -29,7 +30,7 @@ resource appService 'Microsoft.Web/sites@2020-06-01' = {
     }
   }
 }
-resource appServiceLogging 'Microsoft.Web/sites/config@2020-06-01' = {
+resource appServiceLogging 'Microsoft.Web/sites/config@2020-06-01'  = if (deployLogs) {
   name: '${appService.name}/logs'
   properties: {
     applicationLogs: {

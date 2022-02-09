@@ -1,4 +1,8 @@
 {
+    "cloud": {
+        "credentialPrecedence": ["AzurePowerShell"],
+        "currentProfile": "AzureCloud"
+    },
     "analyzers": {
         "core": {
             "enabled": true,
