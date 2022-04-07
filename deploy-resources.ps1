@@ -52,10 +52,21 @@ $password = ConvertTo-SecureString -String "123$%gddTYG&" -AsPlainText -Force
 $vmItems = @('azvmbicep001', 'azvmbicep002', 'azvmbicep003')
 New-AzDeployment -TemplateFile ".\005-multiple-vm-array\005-multiple-vm-array.json" -Name "bicep-test" -Location "westeurope" -virtualNetworkName "azvnet-bicep" -password $password -vmItems $vmItems -rgName "sb-bicep-005"
 
+# 005 - no build
+Write-Host "Starting build and deployment 005"
+
+$password = ConvertTo-SecureString -String "123$%gddTYG&" -AsPlainText -Force
+$vmItems = @('azvmbicep001', 'azvmbicep002', 'azvmbicep003')
+New-AzDeployment -TemplateFile ".\005-multiple-vm-array\005-multiple-vm-array.bicep" -Name "bicep-test" -Location "westeurope" -virtualNetworkName "azvnet-bicep" -password $password -vmItems $vmItems -rgName "sb-bicep-005"
+
+# 005 - What If on Bicep
+New-AzDeployment -TemplateFile ".\005-multiple-vm-array\005-multiple-vm-array.bicep" -Name "bicep-test" -Location "westeurope" -virtualNetworkName "azvnet-bicep" -password $password -vmItems $vmItems -rgName "sb-bicep-005" -WhatIf
+
 # export resource group
 Export-AzResourceGroup -ResourceGroupName "sb-bicep-002" -Path ./main.json
 bicep decompile main.json
 
+New-AzDeployment -TemplateFile ".\scheduledAlert.bicep" -Name "bicep-test" -Location "westeurope" 
 
 #publish bicep file
 bicep publish .\.modules\004-vnet.bicep --target br:azcrbicepregistry.azurecr.io/bicep/modules/vnet:1.0
