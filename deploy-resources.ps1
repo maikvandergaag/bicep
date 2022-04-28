@@ -66,7 +66,5 @@ New-AzDeployment -TemplateFile ".\005-multiple-vm-array\005-multiple-vm-array.bi
 Export-AzResourceGroup -ResourceGroupName "sb-bicep-002" -Path ./main.json
 bicep decompile main.json
 
-New-AzDeployment -TemplateFile ".\scheduledAlert.bicep" -Name "bicep-test" -Location "westeurope" 
-
 #publish bicep file
 bicep publish .\.modules\004-vnet.bicep --target br:azcrbicepregistry.azurecr.io/bicep/modules/vnet:1.0
