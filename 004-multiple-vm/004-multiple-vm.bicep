@@ -10,8 +10,6 @@ param location string = 'westeurope'
 param count int
 param rgName string
 param subnetName string = 'myprivatesubnet'
-var subnetAddressPrefix = '10.1.0.0/24'
-var addressPrefix = '10.1.0.0/16'
 param networkSecurityGroupName string = 'aznsg${subnetName}'
 @secure()
 param password string
@@ -24,7 +22,7 @@ resource appRg 'Microsoft.Resources/resourceGroups@2020-01-01' = {
 }
 
 resource appRgVnet 'Microsoft.Resources/resourceGroups@2020-01-01' = {
-  name: concat(rgName,'-vnet')
+  name: '${rgName}-vnet'
   location: location
   scope: subscription()
 }

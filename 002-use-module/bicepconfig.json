@@ -1,0 +1,47 @@
+{
+    "cloud": {
+        "credentialPrecedence": ["AzurePowerShell"],
+        "currentProfile": "AzureCloud"
+    },
+    "analyzers": {
+        "core": {
+            "enabled": true,
+            "rules": {
+                "adminusername-should-not-be-literal": {
+                    "level": "error"
+                },
+                "no-hardcoded-env-urls": {
+                    "level": "error"
+                },
+                "no-unused-params": {
+                    "level": "error"
+                },
+                "no-unused-vars": {
+                    "level": "error"
+                },
+                "prefer-interpolation": {
+                    "level": "error"
+                },
+                "secure-parameter-default": {
+                    "level": "error"
+                },
+                "simplify-interpolation": {
+                    "level": "error"
+                }
+            }
+        }        
+    },
+    "moduleAliases": {
+        "br": {
+          "SponsorRegistry": {
+            "registry": "azcrbicepregistry.azurecr.io"
+          }
+        },
+        "ts": {
+          "TemplateSpecs": {
+            "subscription": "5b389701-0e47-4738-b4fe-ddb67ac3a036",
+            "resourceGroup": "gaag-rg-templates"
+          }
+        }
+      }
+}
