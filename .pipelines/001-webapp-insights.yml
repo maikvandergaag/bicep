@@ -63,7 +63,7 @@ steps:
       New-AzTemplateSpec -Name "$(templateSpecName)" -Version "$(versionnumber)" -ResourceGroupName "$(resourcegroupname)" -Location "$(location)" -TemplateFile "$(System.DefaultWorkingDirectory)/$(filepathArm)"
     azurePowerShellVersion: 'LatestVersion'
     pwsh: true
-- task: versioncounter@1
+- task: maikvandergaag.maikvandergaag-versioncounter.versioncounter.versioncounter@1
   displayName: "Update version number"
   inputs:
     VersionVariable: 'versionnumber'
