@@ -1,47 +1,146 @@
 {
-    "cloud": {
-        "credentialPrecedence": ["AzurePowerShell"],
-        "currentProfile": "AzureCloud"
+    "experimentalFeaturesEnabled": {
+        "onlyIfNotExists": true,
+        "extensibility": true,
+        "resourceDerivedTypes": true
+    },
+    "extensions": {
+        "microsoftGraphV1": "br:mcr.microsoft.com/bicep/extensions/microsoftgraph/v1.0:0.1.9-preview"
     },
     "analyzers": {
         "core": {
             "enabled": true,
             "rules": {
                 "adminusername-should-not-be-literal": {
+                    "level": "warning"
+                },
+                "artifacts-parameters": {
+                    "level": "warning"
+                },
+                "decompiler-cleanup": {
+                    "level": "warning"
+                },
+                "explicit-values-for-loc-params": {
+                    "level": "off"
+                },
+                "max-asserts": {
+                    "level": "warning"
+                },
+                "max-outputs": {
+                    "level": "warning"
+                },
+                "max-params": {
+                    "level": "warning"
+                },
+                "max-resources": {
+                    "level": "warning"
+                },
+                "max-variables": {
+                    "level": "warning"
+                },
+                "nested-deployment-template-scoping": {
                     "level": "error"
+                },
+                "no-conflicting-metadata": {
+                    "level": "warning"
+                },
+                "no-deployments-resources": {
+                    "level": "warning"
                 },
                 "no-hardcoded-env-urls": {
-                    "level": "error"
+                    "level": "warning"
+                },
+                "no-hardcoded-location": {
+                    "level": "off"
+                },
+                "no-loc-expr-outside-params": {
+                    "level": "off"
+                },
+                "no-unnecessary-dependson": {
+                    "level": "warning"
+                },
+                "no-unused-existing-resources": {
+                    "level": "warning"
                 },
                 "no-unused-params": {
-                    "level": "error"
+                    "level": "warning"
                 },
                 "no-unused-vars": {
-                    "level": "error"
+                    "level": "warning"
+                },
+                "outputs-should-not-contain-secrets": {
+                    "level": "warning"
                 },
                 "prefer-interpolation": {
-                    "level": "error"
+                    "level": "warning"
+                },
+                "prefer-unquoted-property-names": {
+                    "level": "warning"
+                },
+                "protect-commandtoexecute-secrets": {
+                    "level": "warning"
                 },
                 "secure-parameter-default": {
-                    "level": "error"
+                    "level": "warning"
+                },
+                "secure-params-in-nested-deploy": {
+                    "level": "warning"
+                },
+                "secure-secrets-in-params": {
+                    "level": "warning"
                 },
                 "simplify-interpolation": {
+                    "level": "warning"
+                },
+                "simplify-json-null": {
+                    "level": "warning"
+                },
+                "use-parent-property": {
+                    "level": "warning"
+                },
+                "use-recent-api-versions": {
+                    "level": "warning",
+                    "maxAllowedAgeInDays": 730
+                },
+                "use-recent-module-versions": {
+                    "level": "warning"
+                },
+                "use-resource-id-functions": {
+                    "level": "off"
+                },
+                "use-resource-symbol-reference": {
+                    "level": "warning"
+                },
+                "use-safe-access": {
+                    "level": "warning"
+                },
+                "use-secure-value-for-secure-inputs": {
                     "level": "error"
+                },
+                "use-stable-resource-identifiers": {
+                    "level": "warning"
+                },
+                "use-stable-vm-image": {
+                    "level": "warning"
+                },
+                "what-if-short-circuiting": {
+                    "level": "warning"
                 }
             }
-        }        
+        }
     },
     "moduleAliases": {
         "br": {
-          "SponsorRegistry": {
-            "registry": "azcrbicepregistry.azurecr.io"
-          }
+            "myregistry": {
+                "registry": "azcrbicepregistryiacprd.azurecr.io",
+                "modulePath": "modules"
+            }
         },
         "ts": {
-          "TemplateSpecs": {
-            "subscription": "5b389701-0e47-4738-b4fe-ddb67ac3a036",
-            "resourceGroup": "gaag-rg-templates"
-          }
+            "TemplateSpecs": {
+                "subscription": "5b389701-0e47-4738-b4fe-ddb67ac3a036",
+                "resourceGroup": "gaag-rg-templates"
+            }
         }
-      }
+    }
 }
