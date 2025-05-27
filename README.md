@@ -1,4 +1,4 @@
-# bicep
+# Bicep
 
 This repository contains a collection of Bicep files and reusable modules for Azure infrastructure as code. The files are organized into directories by topic, each demonstrating best practices, patterns, and advanced scenarios for deploying and managing Azure resources using Bicep.
 
