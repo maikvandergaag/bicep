@@ -83,7 +83,7 @@ resource appServiceAppSettings 'Microsoft.Web/sites/config@2024-04-01' = {
 }
 
 resource appInsights 'Microsoft.Insights/components@2020-02-02' = {
-  name: 'api-${name}'
+  name: concat('api-', name)
   location: location
   kind: 'string'
   properties: {
@@ -92,7 +92,7 @@ resource appInsights 'Microsoft.Insights/components@2020-02-02' = {
   }
 }
 
-resource logAnalyticsWorkspace 'Microsoft.OperationalInsights/workspaces@2025-02-01' = {
+resource logAnalyticsWorkspace 'Microsoft.OperationalInsights/workspaces@2021-06-01' = {
   name: 'log-${name}'
   location: location
   properties: {
