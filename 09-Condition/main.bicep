@@ -1,7 +1,7 @@
 
 metadata info = {
-  title: 'Example file for showing IDE functionality'
-  description: 'Bicep template used for showing IDE functionality'
+  title: 'Example file for showing Condition functionality'
+  description: 'Bicep template used for showing Condition functionality'
   version: '1.0.0'
   author: 'Maik van der Gaag'
 }

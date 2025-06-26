@@ -1,0 +1,37 @@
+name: Build IaC
+
+on:
+  push:
+    paths:
+      - 'bicep/**'
+  pull_request:
+    paths:
+      - 'bicep/**'
+  workflow_dispatch:
+
+env:
+  allFiles: ${{ github.event_name != 'pull_request' || ( github.base_ref == 'main') }}
+
+permissions:
+  id-token: write
+  contents: read
+  security-events: write
+
+jobs:
+  build:
+    name:  Build IaC
+    runs-on: ubuntu-latest
+    steps:
+      - uses: maikvandergaag/action-biceplint@main
+        id: lint
+        with:
+          allfiles: ${{ env.allFiles }}
+          create-sarif: false
+          markdown-report: false
+      - uses: actions/upload-artifact@v4
+        name: Upload IaC artifacts
+        with:
+          name: iac
+          path: |
+            ${{ github.workspace }}/**/*.bicep
+            ${{ github.workspace }}/**/*.bicepparam
