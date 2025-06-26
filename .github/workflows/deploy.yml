@@ -36,7 +36,6 @@ jobs:
             branch: ${{ github.head_ref }}
             name: iac
             run_id: ${{ inputs.workflow_run_id }}
-            path: myapp
       - name: Download latest artifact
         if: ${{ inputs.workflow_run_id == '' }}
         id: download-artifact-latest-app
@@ -47,7 +46,6 @@ jobs:
             workflow_conclusion: success
             branch: ${{ github.head_ref }}
             name: iac
-            path: myapp
       - name: deploy
         id: deploytemp
         uses: azure/bicep-deploy@v2
