@@ -2,11 +2,7 @@ name: Build IaC
 
 on:
   push:
-    paths:
-      - 'bicep/**'
   pull_request:
-    paths:
-      - 'bicep/**'
   workflow_dispatch:
 
 env:
@@ -19,9 +15,20 @@ permissions:
 
 jobs:
   build:
+    environment: Azure
+    permissions:
+      contents: read
+      id-token: write
+      actions: read
     name:  Build IaC
     runs-on: ubuntu-latest
     steps:
+      - name: Azure login
+        uses: azure/login@v2
+        with:
+          client-id: ${{ secrets.CLIENT_ID }}
+          tenant-id: ${{ secrets.TENANT_ID }}
+          subscription-id: ${{ secrets.SUBSCRIPTION_ID }}
       - uses: maikvandergaag/action-biceplint@main
         id: lint
         with:
