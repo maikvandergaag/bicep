@@ -48,12 +48,6 @@ jobs:
             branch: ${{ github.head_ref }}
             name: iac
             path: myapp
-      - name: Download coverage artifacts
-        uses: actions/download-artifact@v4
-        with:
-          run-id: ${{ github.event_name == 'workflow_run' && github.event.workflow_run.id || inputs.workflow_run_id }}
-          github-token: ${{ github.token}}
-          name: iac
       - name: deploy
         id: deploytemp
         uses: azure/bicep-deploy@v2
@@ -65,12 +59,3 @@ jobs:
           location: 'westeurope'
           subscription-id:  ${{ secrets.SUBSCRIPTION_ID }}
           template-file: 08-Loops/main.bicepparam
-      - name: Azure CLI script
-        uses: azure/cli@v2
-        with:
-          azcliversion: latest
-          inlineScript: |
-            az deployment sub create --name 'bicep-deployment' \
-                    --template-file 'bicep/main.bicep' \
-                    --parameters 'bicep/main.bicepparam' \
-                    --location 'westeurope'
