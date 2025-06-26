@@ -52,7 +52,7 @@ jobs:
         with:
           type: 'deployment'
           name: 'bicep-deployment-from-github'
-          resource-group-name: rg-github-action-deploy
+          resource-group-name: sponsor-rg-github-action-deploy
           scope: 'resourceGroup'
           operation: 'create'
           location: 'westeurope'
