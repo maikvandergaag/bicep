@@ -59,4 +59,5 @@ jobs:
           operation: 'create'
           location: 'westeurope'
           subscription-id:  ${{ secrets.SUBSCRIPTION_ID }}
-          template-file: 08-Loops/main.bicepparam
+          template-file: ./08-Loops/main.bicep
+          parameters-file: ./08-Loops/main.bicepparam
