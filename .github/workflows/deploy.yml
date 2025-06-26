@@ -55,6 +55,7 @@ jobs:
           type: 'deployment'
           name: 'bicep-deployment-from-github'
           resource-group-name: rg-github-action-deploy
+          scope: 'resourceGroup'
           operation: 'create'
           location: 'westeurope'
           subscription-id:  ${{ secrets.SUBSCRIPTION_ID }}
